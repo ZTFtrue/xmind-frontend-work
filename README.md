@@ -10,7 +10,6 @@ __运行环境:__ 不限操作系统, 需要安装Node.js和npm.
 
 ### 运行和测试
 
-
 ```sh
 npm i
 npm run start
