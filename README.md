@@ -17,6 +17,8 @@ npm run start
 
 在浏览器中打开[http://localhost:4200/](http://localhost:4200/)
 
+目前firefox输入时间存在bug [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)
+
 代码目录: ```./src/``` , 其中 ```./src/app/``` 是项目主要代码, ```./src/assets/```是资源存放目录.
 
 如果需要单元测试, 运行```npm run test```
@@ -54,9 +56,7 @@ npm run start
 
 添加数据时发现我在开始做过滤的时候,看到数据是同一年, 只添加了月份,和账单类型和账单分类的过滤. 如果用户添加不同的年, 需要加上年份过滤. 账单分类用户可以自由输入,又加上了```mat-autocomplete```和```categroiesFilterData``` 数组, 以便对用户进行友好的提示.对select 控件重新处理, 以便自动选择年,和有多个年的时候,禁止选择月份.
 
-最后补上需求, 没有选择月份的时候, 不进行统计.
-
-集中进行CSS开发, 兼容手机和电脑(就是不怎么好看)
+最后补上需求, 没有选择月份的时候, 不进行统计. 集中进行CSS开发, 兼容手机和电脑(就是不怎么好看)
 
 ## 未定问题
 
