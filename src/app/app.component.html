@@ -1,0 +1,93 @@
+<div class="add-bill-view">
+  <form class="add-bill-form" autocomplete="off" *ngIf="showAddBill" [formGroup]="form" (ngSubmit)="addBill()">
+    <mat-form-field>
+      <mat-label>账单类型</mat-label>
+      <mat-select formControlName="typeControl" required>
+        <mat-option *ngFor="let item of type" [value]="item.id">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field style="flex-grow: 1;">
+      <input matInput type="datetime-local" formControlName="dateControl" placeholder="选择或者输入日期">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="输入账单分类, 不支持空格" aria-label="Number" matInput formControlName="categroyControl"
+        [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>输入金额,单位: 元</mat-label>
+      <input matInput formControlName="amountControl" type="number" placeholder="输入金额,单位: 元" required>
+    </mat-form-field>
+    <button mat-raised-button *ngIf="showAddBill" color="primary" style="flex-grow: 0;" type="submit">确定添加</button>
+  </form>
+  <button mat-raised-button (click)="showAddBill=!showAddBill"> {{showAddBill?'取消添加':'添加账单'}} </button>
+</div>
+<span style="padding: 10px;"> 选择过滤 : </span>
+<div class="filter-view">
+  <mat-form-field>
+    <mat-label>选择年</mat-label>
+    <mat-select #year (selectionChange)="selectionYearChange($event)">
+      <mat-option [value]="null">
+        全部
+      </mat-option>
+      <mat-option *ngFor="let item of years" [value]="item">
+        {{item}}年
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>选择月</mat-label>
+    <mat-select #month (selectionChange)="selectionMonthChange($event)">
+      <mat-option [value]="null">
+        全部
+      </mat-option>
+      <mat-option *ngFor="let item of months" [value]="item">
+        {{item}}月
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngFor="let filter of filterSelect">
+    <mat-label>选择{{filter.name}}</mat-label>
+    <mat-select (selectionChange)="selectionChange($event,filter.id)">
+      <mat-option [value]="null">
+        全部
+      </mat-option>
+      <mat-option *ngFor="let item of filter.value" [value]="item.id">
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div class="statistic-view" *ngIf="month.value&&statisticBill.length>0">
+  <span>当前所选项目支出: {{ouputMoney|currency:'CNY':'symbol-narrow':'4.2-2'}}</span><br>
+  <span>当前所选项目收入: {{inputMoney|currency:'CNY':'symbol-narrow':'4.2-2'}}</span><br>
+  <!-- <span>当前所选项目净收入: {{inputMoney-ouputMoney|currency:'CNY':'symbol-narrow':'4.2-2'}}</span> -->
+  <div class="staistic-box" *ngIf="showStatistic">
+    支出金额统计信息:
+    <mat-form-field>
+      <mat-label>选择排序方式</mat-label>
+      <mat-select #order [value]="1" (selectionChange)="selectionOrderChange($event)">
+        <mat-option *ngFor="let item of orderSort" [value]="item.value">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <app-list-item-view [showBillData]="statisticBill">
+
+    </app-list-item-view>
+  </div>
+  <button *ngIf="statisticBill.length!==0"
+    (click)="showStatistic=!showStatistic">{{showStatistic?'收起':'查看更多统计信息'}}</button>
+</div>
+<div *ngIf="showBillData.length===0">
+  当前选择没有账单
+</div>
+<app-list-item-view [showBillData]="showBillData">
+
+</app-list-item-view>

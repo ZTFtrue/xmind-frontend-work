@@ -1,0 +1,16 @@
+<div class="list-view" role="list">
+  <div class="bill-list-item" role="listitem" *ngFor="let item of showBillData">
+    <div class="bill-list-item-left">
+      <span style="padding: 10px 0 10px 0;">
+        {{item.type|text:'type'}}&nbsp;-&nbsp;{{item.categoryName}}
+      </span>
+      <span style="padding-bottom: 10px;">
+        {{item.time|date:'yyyy-MM-dd-EEEEEHH:mm:ssZZZZZ':'en-US'}}
+      </span>
+    </div>
+
+    <span>
+      {{item.amount|currency:'CNY':'symbol-narrow':'4.2-2'}}
+    </span>
+  </div>
+</div>
