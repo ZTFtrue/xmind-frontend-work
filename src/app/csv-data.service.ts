@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, forkJoin } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,13 @@ export class CsvDataService {
     return forkJoin([this.getCategroiesData(), this.getBillData()]).pipe(tap(result => { }));
   }
   getBillData() {
-    return this.http.get<string>('/assets/bill.csv', { responseType: 'text' as 'json' })
+    return this.http.get<string>(environment.url + '/assets/bill.csv', { responseType: 'text' as 'json' })
       .pipe(tap(result => { }),
         catchError(this.handleError<any>('Get bill'))
       );
   }
   getCategroiesData() {
-    return this.http.get<string>('/assets/categories.csv', { responseType: 'text' as 'json' })
+    return this.http.get<string>(environment.url + '/assets/categories.csv', { responseType: 'text' as 'json' })
       .pipe(tap(result => { }),
         catchError(this.handleError<any>('Get categories'))
       );
