@@ -2,7 +2,7 @@
 
 [作业地址](https://github.com/xmindltd/hiring/tree/master/frontend-1)
 
-[点击预览, 支持手机和电脑]()
+[点击预览, 支持手机和电脑](https://ztftrue.github.io/xmind-frontend-work/)
 
 ## 如何运行
 
