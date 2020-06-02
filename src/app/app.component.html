@@ -33,7 +33,7 @@
   <mat-form-field>
     <mat-label>选择年</mat-label>
     <mat-select #year (selectionChange)="selectionYearChange($event)">
-      <mat-option [value]="null">
+      <mat-option [value]="-1">
         全部
       </mat-option>
       <mat-option *ngFor="let item of years" [value]="item">
@@ -44,7 +44,7 @@
   <mat-form-field>
     <mat-label>选择月</mat-label>
     <mat-select #month (selectionChange)="selectionMonthChange($event)">
-      <mat-option [value]="null">
+      <mat-option [value]="-1">
         全部
       </mat-option>
       <mat-option *ngFor="let item of months" [value]="item">
@@ -55,7 +55,7 @@
   <mat-form-field *ngFor="let filter of filterSelect">
     <mat-label>选择{{filter.name}}</mat-label>
     <mat-select (selectionChange)="selectionChange($event,filter.id)">
-      <mat-option [value]="null">
+      <mat-option [value]="-1">
         全部
       </mat-option>
       <mat-option *ngFor="let item of filter.value" [value]="item.id">

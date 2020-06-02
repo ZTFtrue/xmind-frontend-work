@@ -225,7 +225,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     const isFilterSet: boolean[] = [];
     // 遍历过滤条件
     for (const col in searchTerms) {
-      if (searchTerms[col] != null) {
+      if (searchTerms[col] != null && searchTerms[col] !== -1) {
         if (String(data[col]) === String(searchTerms[col])) {
           isFilterSet.push(true);
         } else {
@@ -246,9 +246,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.ouputMoney = 0;
     this.inputMoney = 0;
     // 只对月份进行处理
-    if (this.filterValues.month === null ||
-      this.filterValues.category !== null ||
-      this.filterValues.type !== null) {
+    console.log( this.filterValues.type);
+    if (this.filterValues.month === -1 ||
+      String(this.filterValues.category) !== '-1' ||
+      this.filterValues.type !== -1 ) {
       return;
     }
     this.ouputMoney = 0;
