@@ -392,4 +392,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     };
     scrollBottom();
   }
+  showAddBillView() {
+    this.showAddBill = !this.showAddBill;
+    const scrollToTop = () => {
+      window.scrollTo(0, 0);
+    };
+    scrollToTop();
+  }
 }
