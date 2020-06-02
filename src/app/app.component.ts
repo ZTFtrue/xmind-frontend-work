@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   years: number[] = [];
   months: number[] = [];
   // 过滤类型存储
-  filterValues: Bill = { type: null, time: null, category: null, categoryName: null, amount: null, month: null, year: null };
+  filterValues: Bill = { type: -1, time: -1, category: '-1', categoryName: null, amount: null, month: -1, year: -1 };
   // 这个DataSource 是直接复制的MatTableDataSource
   dataSource = new ListDataSource(this.billData);
   // 支出和收入
@@ -37,6 +37,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   statisticBill: Bill[] = [];
   // 要显示的数据
   showBillData: Bill[] = [];
+
+  // 选择全部
+  allSelect = -1;
 
   type = [{ name: '支出', id: 0 }, { name: '收入', id: 1 }];
   // 添加账单form
@@ -203,12 +206,12 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.filterValues.year = data.value;
     if (this.filterValues.year === null) {
       this.monthMatSelectComponent.disabled = true;
-      this.monthMatSelectComponent.value = null;
-      this.filterValues.month = null;
+      this.monthMatSelectComponent.value = -1;
+      this.filterValues.month = -1;
     } else {
       this.monthMatSelectComponent.disabled = false;
-      this.monthMatSelectComponent.value = null;
-      this.filterValues.month = null;
+      this.monthMatSelectComponent.value = -1;
+      this.filterValues.month = -1;
     }
     this.dataSource.filter = JSON.stringify(this.filterValues);
   }
@@ -225,7 +228,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     const isFilterSet: boolean[] = [];
     // 遍历过滤条件
     for (const col in searchTerms) {
-      if (searchTerms[col] != null && searchTerms[col] !== -1) {
+      if (searchTerms[col] !== null && String(searchTerms[col]) !== String(-1)) {
         if (String(data[col]) === String(searchTerms[col])) {
           isFilterSet.push(true);
         } else {
@@ -246,10 +249,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.ouputMoney = 0;
     this.inputMoney = 0;
     // 只对月份进行处理
-    console.log( this.filterValues.type);
-    if (this.filterValues.month === -1 ||
-      String(this.filterValues.category) !== '-1' ||
-      this.filterValues.type !== -1 ) {
+    if (String(this.filterValues.month) === String(this.allSelect) ||
+      String(this.filterValues.category) !== String(this.allSelect) ||
+      String(this.filterValues.type) !== String(this.allSelect)) {
       return;
     }
     this.ouputMoney = 0;
@@ -355,13 +357,14 @@ export class AppComponent implements OnInit, AfterViewInit {
           this.monthMatSelectComponent.value = bill.month;
           this.filterValues.month = bill.month;
         }
-        this.filterValues.category = null;
-        this.filterValues.type = null;
+        this.filterValues.category = '-1';
+        this.filterValues.type = -1;
         this.dataSource.filter = JSON.stringify(this.filterValues);
 
       }
       this.showAddBill = false;
       this.form.reset();
+      this.scrollToBottom();
     }
   }
   getCategroyByName(name: string): Category {
@@ -376,13 +379,17 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
   // 平滑向下滚动
   scrollToBottom() {
-    const y = window.scrollY;
-    while (true) {
-      window.requestAnimationFrame(this.scrollToBottom);
-      window.scrollTo(0, 1000);
-      if (window.scrollY === y) {
-        break;
+    const scrollBottom = () => {
+      let y = window.scrollY;
+      while (true) {
+        window.scrollTo(0, 1000);
+        if (window.scrollY === 0 || window.scrollY === y) {
+          break;
+        }
+        window.requestAnimationFrame(scrollBottom);
+        y = window.scrollY;
       }
-    }
+    };
+    scrollBottom();
   }
 }

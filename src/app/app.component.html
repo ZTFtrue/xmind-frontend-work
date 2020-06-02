@@ -43,7 +43,7 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>选择月</mat-label>
-    <mat-select #month (selectionChange)="selectionMonthChange($event)">
+    <mat-select #month [value]="-1" (selectionChange)="selectionMonthChange($event)">
       <mat-option [value]="-1">
         全部
       </mat-option>
@@ -54,7 +54,7 @@
   </mat-form-field>
   <mat-form-field *ngFor="let filter of filterSelect">
     <mat-label>选择{{filter.name}}</mat-label>
-    <mat-select (selectionChange)="selectionChange($event,filter.id)">
+    <mat-select [value]="-1" (selectionChange)="selectionChange($event,filter.id)">
       <mat-option [value]="-1">
         全部
       </mat-option>
