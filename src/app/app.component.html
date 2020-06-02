@@ -8,7 +8,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field style="flex-grow: 1;">
+    <mat-form-field >
       <input matInput type="datetime-local" formControlName="dateControl" placeholder="选择或者输入日期">
     </mat-form-field>
     <mat-form-field class="example-full-width">
@@ -54,7 +54,7 @@
   </mat-form-field>
   <mat-form-field *ngFor="let filter of filterSelect">
     <mat-label>选择{{filter.name}}</mat-label>
-    <mat-select [value]="-1" (selectionChange)="selectionChange($event,filter.id)">
+    <mat-select [value]="-1" (selectionChange)="selectionChange($event,filter.id)"  panelClass="select-panel">
       <mat-option [value]="-1">
         全部
       </mat-option>
