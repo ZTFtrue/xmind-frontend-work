@@ -25,6 +25,12 @@ npm run start
 
 **注意:** 如果是**第一次安装 Angular** 中间会有个选择过程
 
+### 我的测试环境
+
+1. Linux : Chrome, Firefox (无法输入时间和日期, 浏览器Bug )
+2. Window : Chrome, Firefox (无法输入时间和日期, 浏览器Bug )
+3. Android : Chrome, Firefox ( Android 版 Firefox 可以输入时间和日期 )
+
 ## 思考过程和问题
 
 ### 分析需求
@@ -46,7 +52,7 @@ npm run start
 基本流程:
 展示数据->筛选数据->统计和排序->添加数据
 
-因为对Angular熟悉, 所以选择Angular 开发.
+因为对 Angular 熟悉, 所以选择 Angular 开发.
 
 ### 开发及问题
 
