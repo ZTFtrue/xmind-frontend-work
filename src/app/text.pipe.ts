@@ -10,7 +10,7 @@ export class TextPipe implements PipeTransform {
     const column = args;
     switch (column) {
       case 'type':
-        value = value === '1' ? '收入' : '支出';
+        value = String(value) === '1' ? '收入' : '支出';
         break;
       case 'category':
         value = categroiesData[value].name;
