@@ -41,16 +41,15 @@ describe('AppComponent', () => {
       ],
       providers: [AppComponent, CsvDataService],
     }).compileComponents().then(() => {
-
+      fixture = TestBed.createComponent(AppComponent);
+      csvDataService = fixture.componentRef.injector.get(CsvDataService);
+      component = fixture.componentInstance;
+      expect(component).toBeTruthy();
     });
   }));
 
   it('should create the app', () => {
-    fixture = TestBed.createComponent(AppComponent);
-    component = fixture.componentInstance;
     expect(component).toBeTruthy();
-    csvDataService = fixture.componentRef.injector.get(CsvDataService);
-
   });
 
   it('#showAddBillView() should toggle showAddBill', async(() => {
@@ -63,30 +62,30 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     expect(component.showAddBill).toBe(false);
   }));
+  it('should get month and year ', () => {
+    expect(component.getMonth(new Date(1561910400000))).toEqual(7);
+    expect(component.getYear(new Date(1561910400000))).toEqual(2019);
+  });
   it('list element should have', async(() => {
     csvDataService.getBillAndCategroies().subscribe(value => {
-      expect(value).toBeDefined();
-      component.parseDataMessage(value[0], ',');
-      component.parseCsv(value[1], ',', true);
-      component.filterSelect.push({ id: 'category', name: '账单分类', value: this.categroiesFilterData });
-      component.filterSelect.push({ id: 'type', name: '账单类型', value: this.type });
-      if (component.years.length > 0) {
-        component.yearMatSelectComponent.value = this.years[0];
-        component.filterValues.year = this.years[0];
-        component.dataSource.filter = JSON.stringify(this.filterValues);
-      } else {
-        component.monthMatSelectComponent.disabled = true;
-        component.monthMatSelectComponent.value = null;
-      }
+      expect(value.length === 2).toBeTruthy();
+      expect(component.parseDataMessage(value[0], ',')).toBeDefined();
+      expect(component.categroiesFilterData.length > 0).toBe(true);
+      expect(component.parseCsv(value[1], ',', true)).toBeDefined();
+      expect(component.billData.length > 0).toBe(true);
+      expect(component.billData[0].month > 0).toBe(true);
+      component.filterSelect.push({ id: 'category', name: '账单分类', value: component.categroiesFilterData });
+      component.filterSelect.push({ id: 'type', name: '账单类型', value: component.type });
+      expect(component.filterSelect.length > 0).toBeTrue();
+      expect(component.years.length > 0).toBeTrue();
+      component.yearMatSelectComponent.value = component.years[0];
+      component.filterValues.year = component.years[0];
+      component.dataSource.filter = JSON.stringify(component.filterValues);
       const element = fixture.debugElement.query(By.css('bill-list-item'));
       expect(element.childNodes.length > 0).toBe(true);
     });
   }));
-  // it('should display a different test title', () => {
-  //   component.yearMatSelectComponent.value = 2019;
-  //   fixture.detectChanges();
-  //   expect(h1.textContent).toContain('Test Title');
-  // });
+
   afterEach(() => {
     // clean data
   });
