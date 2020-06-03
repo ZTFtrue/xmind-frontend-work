@@ -71,20 +71,6 @@ button {
   box-sizing: border-box;
 }
 
-.bill-list-item-left {
-  display: flex;
-  width: 60%;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-}
-
-.list-view {
-  display: flex;
-  flex-direction: column;
-}
-
 .select-panel {
   width: 100px;
 }
