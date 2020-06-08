@@ -11,7 +11,7 @@
     <!-- <mat-form-field>
       <input matInput #timePicker type="datetime-local" formControlName="dateControl" placeholder="选择或者输入日期">
     </mat-form-field> -->
-    <lib-angular-datetime-picker [(value)]="timeValue"></lib-angular-datetime-picker>
+    <div>选择时间: <lib-angular-datetime-picker [(value)]="timeValue"></lib-angular-datetime-picker></div>
     <mat-form-field class="example-full-width">
       <input type="text" placeholder="输入账单分类, 不支持空格" aria-label="Number" matInput formControlName="categroyControl"
         [matAutocomplete]="auto">
