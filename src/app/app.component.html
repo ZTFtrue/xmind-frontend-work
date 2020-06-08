@@ -1,6 +1,4 @@
 <div class="add-bill-view">
-  <!-- <angu></lib-angular-datetime-picker> -->
-  <lib-angular-datetime-picker></lib-angular-datetime-picker>
   <form class="add-bill-form" autocomplete="off" *ngIf="showAddBill" [formGroup]="form" (ngSubmit)="addBill()">
     <mat-form-field>
       <mat-label>账单类型</mat-label>
@@ -10,9 +8,10 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field>
-      <input matInput type="datetime-local" formControlName="dateControl" placeholder="选择或者输入日期">
-    </mat-form-field>
+    <!-- <mat-form-field>
+      <input matInput #timePicker type="datetime-local" formControlName="dateControl" placeholder="选择或者输入日期">
+    </mat-form-field> -->
+    <lib-angular-datetime-picker [(value)]="timeValue"></lib-angular-datetime-picker>
     <mat-form-field class="example-full-width">
       <input type="text" placeholder="输入账单分类, 不支持空格" aria-label="Number" matInput formControlName="categroyControl"
         [matAutocomplete]="auto">

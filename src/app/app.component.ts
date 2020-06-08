@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { CsvDataService } from './csv-data.service';
 import { Category } from './model/category';
 import { Bill } from './model/bill';
@@ -7,7 +7,6 @@ import { ListDataSource } from './list-data-source';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
-import { AngularDatetimePickerComponent } from 'angular-datetime-picker';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -47,9 +46,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     amountControl: new FormControl('', [
       Validators.required,
     ]),
-    dateControl: new FormControl('', [
-      Validators.required
-    ]),
+    // dateControl: new FormControl('', [
+    //   Validators.required
+    // ]),
     typeControl: new FormControl('', [
       Validators.required
     ]),
@@ -69,6 +68,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   filteredOptions: Observable<Category[]>;
 
+  timeValue: number;
 
   @ViewChild('year', { static: true }) yearMatSelectComponent: MatSelect;
   @ViewChild('month', { static: true }) monthMatSelectComponent: MatSelect;
@@ -323,8 +323,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
   }
   addBill() {
-    if (this.form.valid) {
-      const date = new Date(this.form.value.dateControl);
+    if (this.form.valid && this.timeValue) {
+      const date = new Date(this.timeValue);
       const bill = new Bill();
       bill.amount = parseInt(this.form.value.amountControl, 10);
       const categoryName = this.form.value.categroyControl.trim();
