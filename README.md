@@ -17,7 +17,7 @@ npm run start
 
 在浏览器中打开[http://localhost:4200/](http://localhost:4200/)
 
-目前firefox输入时间存在bug [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)
+_目前firefox输入时间存在bug [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)_(正在使用 Custom datetimepicker 代替)
 
 代码目录: ```./src/``` , 其中 ```./src/app/``` 是项目主要代码, ```./src/assets/```是资源存放目录.
 
