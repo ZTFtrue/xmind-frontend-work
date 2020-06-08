@@ -1,4 +1,6 @@
 <div class="add-bill-view">
+  <!-- <angu></lib-angular-datetime-picker> -->
+  <lib-angular-datetime-picker></lib-angular-datetime-picker>
   <form class="add-bill-form" autocomplete="off" *ngIf="showAddBill" [formGroup]="form" (ngSubmit)="addBill()">
     <mat-form-field>
       <mat-label>账单类型</mat-label>
@@ -8,7 +10,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field >
+    <mat-form-field>
       <input matInput type="datetime-local" formControlName="dateControl" placeholder="选择或者输入日期">
     </mat-form-field>
     <mat-form-field class="example-full-width">
@@ -54,7 +56,7 @@
   </mat-form-field>
   <mat-form-field *ngFor="let filter of filterSelect">
     <mat-label>选择{{filter.name}}</mat-label>
-    <mat-select [value]="-1" (selectionChange)="selectionChange($event,filter.id)"  panelClass="select-panel">
+    <mat-select [value]="-1" (selectionChange)="selectionChange($event,filter.id)" panelClass="select-panel">
       <mat-option [value]="-1">
         全部
       </mat-option>

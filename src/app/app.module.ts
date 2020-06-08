@@ -12,6 +12,7 @@ import { TextPipe } from './text.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { ListItemViewComponent } from './list-item-view/list-item-view.component';
+import { AngularDatetimePickerModule } from 'angular-datetime-picker';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ListItemViewComponent } from './list-item-view/list-item-view.component
     MatInputModule,
     MatListModule,
     MatAutocompleteModule,
-    MatButtonModule
+    MatButtonModule,
+    AngularDatetimePickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
